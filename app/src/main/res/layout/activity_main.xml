@@ -13,7 +13,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="🚀 Browser Launcher"
+            android:text="Browser Launcher"
             android:textColor="#FFFFFF"
             android:textSize="22sp"
             android:textStyle="bold"
@@ -33,7 +33,6 @@
             android:layout_height="52dp"
             android:background="#111113"
             android:hint="https://example.com"
-            android:hintTextColor="#444444"
             android:inputType="textUri"
             android:padding="12dp"
             android:textColor="#F0F0F0"
@@ -45,7 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:background="#1E1E24"
-            android:text="📋 Вставить из буфера"
+            android:text="Вставить из буфера"
             android:textColor="#AAAAAA"
             android:textSize="14sp"
             android:layout_marginBottom="24dp"/>
@@ -63,7 +62,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:checked="true"
-            android:text="🟦 Chrome (инкогнито)"
+            android:text="Chrome (инкогнито)"
             android:textColor="#DDDDDD"
             android:textSize="15sp"/>
 
@@ -72,7 +71,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:checked="true"
-            android:text="🦆 DuckDuckGo"
+            android:text="DuckDuckGo"
             android:textColor="#DDDDDD"
             android:textSize="15sp"/>
 
@@ -81,7 +80,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:checked="true"
-            android:text="🐬 Dolphin"
+            android:text="Dolphin"
             android:textColor="#DDDDDD"
             android:textSize="15sp"/>
 
@@ -90,7 +89,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:checked="true"
-            android:text="🧡 Mi Browser"
+            android:text="Mi Browser"
             android:textColor="#DDDDDD"
             android:textSize="15sp"
             android:layout_marginBottom="20dp"/>
@@ -100,7 +99,7 @@
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:background="#4A7FF5"
-            android:text="🚀 Открыть во всех браузерах"
+            android:text="Открыть во всех браузерах"
             android:textColor="#FFFFFF"
             android:textSize="16sp"
             android:textStyle="bold"
