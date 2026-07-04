@@ -4,6 +4,7 @@ plugins {
 }
 
 android {
+    namespace 'com.browserlauncher'
     compileSdk 34
     defaultConfig {
         applicationId "com.browserlauncher"
