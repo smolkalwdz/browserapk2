@@ -1,6 +1,5 @@
 package com.browserlauncher
 
-import android.content.ComponentName
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -47,7 +46,7 @@ class MainActivity : AppCompatActivity() {
             val text = clipboard.primaryClip?.getItemAt(0)?.text?.toString()
             if (!text.isNullOrEmpty()) {
                 urlInput.setText(text)
-                statusText.text = "✅ Вставлено"
+                statusText.text = "Вставлено"
             }
         }
 
@@ -59,7 +58,7 @@ class MainActivity : AppCompatActivity() {
     private fun launchAll() {
         var url = urlInput.text.toString().trim()
         if (url.isEmpty()) {
-            statusText.text = "⚠️ Введи ссылку!"
+            statusText.text = "Введи ссылку!"
             return
         }
         if (!url.startsWith("http://") && !url.startsWith("https://")) {
@@ -69,17 +68,17 @@ class MainActivity : AppCompatActivity() {
 
         val selected = browsers.filterIndexed { i, _ -> checkBoxes[i].isChecked }
         if (selected.isEmpty()) {
-            statusText.text = "⚠️ Выбери хотя бы один браузер"
+            statusText.text = "Выбери хотя бы один браузер"
             return
         }
 
         val handler = Handler(Looper.getMainLooper())
         selected.forEachIndexed { index, browser ->
             handler.postDelayed({
-                statusText.text = "🔄 Открываю ${browser.name}... (${index + 1}/${selected.size})"
+                statusText.text = "Открываю ${browser.name}... (${index + 1}/${selected.size})"
                 openInBrowser(url, browser)
                 if (index == selected.size - 1) {
-                    handler.postDelayed({ statusText.text = "✅ Готово!" }, 1000)
+                    handler.postDelayed({ statusText.text = "Готово!" }, 1000)
                 }
             }, index * 1500L)
         }
@@ -87,21 +86,51 @@ class MainActivity : AppCompatActivity() {
 
     private fun openInBrowser(url: String, browser: Browser) {
         try {
-            val intent = if (browser.incognito) {
-                Intent(Intent.ACTION_VIEW, Uri.parse(url)).apply {
-                    `package` = browser.pkg
-                    putExtra("com.android.browser.application_id", packageName)
-                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_MULTIPLE_TASK
-                    // Chrome incognito flag
-                    putExtra("incognito", true)
+            when {
+                // Chrome — запускаем через intent с флагом инкогнито
+                browser.pkg == "com.android.chrome" && browser.incognito -> {
+                    // Способ 1: через command line extras (работает на большинстве версий)
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url)).apply {
+                        `package` = browser.pkg
+                        flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_MULTIPLE_TASK
+                        putExtra("com.android.browser.application_id", packageName)
+                        // Флаги инкогнито для Chrome
+                        putExtra("incognito", true)
+                        putExtra("new_incognito_tab", true)
+                    }
+                    // Способ 2: через intent URI с параметром инкогнито
+                    val incognitoIntent = Intent.parseUri(
+                        "intent://${url.removePrefix("https://").removePrefix("http://")}#Intent;" +
+                        "scheme=https;" +
+                        "package=com.android.chrome;" +
+                        "B.incognito=true;" +
+                        "B.create_new_tab=true;" +
+                        "end",
+                        Intent.URI_INTENT_SCHEME
+                    )
+                    try {
+                        startActivity(incognitoIntent)
+                    } catch (e: Exception) {
+                        startActivity(intent)
+                    }
                 }
-            } else {
-                Intent(Intent.ACTION_VIEW, Uri.parse(url)).apply {
-                    `package` = browser.pkg
-                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_MULTIPLE_TASK
+                // DDG — поддерживает приватный режим по умолчанию
+                browser.pkg == "com.duckduckgo.mobile.android" -> {
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url)).apply {
+                        `package` = browser.pkg
+                        flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_MULTIPLE_TASK
+                    }
+                    startActivity(intent)
+                }
+                // Остальные браузеры
+                else -> {
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url)).apply {
+                        `package` = browser.pkg
+                        flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_MULTIPLE_TASK
+                    }
+                    startActivity(intent)
                 }
             }
-            startActivity(intent)
         } catch (e: Exception) {
             statusText.text = "${browser.name} не установлен"
         }
