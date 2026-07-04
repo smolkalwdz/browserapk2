@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0F0F10"
+    android:padding="20dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="🚀 Browser Launcher"
+            android:textColor="#FFFFFF"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="6dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Вставь ссылку — откроется во всех браузерах"
+            android:textColor="#888888"
+            android:textSize="14sp"
+            android:layout_marginBottom="20dp"/>
+
+        <EditText
+            android:id="@+id/urlInput"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:background="#111113"
+            android:hint="https://example.com"
+            android:hintTextColor="#444444"
+            android:inputType="textUri"
+            android:padding="12dp"
+            android:textColor="#F0F0F0"
+            android:textSize="15sp"
+            android:layout_marginBottom="8dp"/>
+
+        <Button
+            android:id="@+id/btnPaste"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="#1E1E24"
+            android:text="📋 Вставить из буфера"
+            android:textColor="#AAAAAA"
+            android:textSize="14sp"
+            android:layout_marginBottom="24dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="БРАУЗЕРЫ:"
+            android:textColor="#555555"
+            android:textSize="11sp"
+            android:layout_marginBottom="8dp"/>
+
+        <CheckBox
+            android:id="@+id/cbChrome"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:checked="true"
+            android:text="🟦 Chrome (инкогнито)"
+            android:textColor="#DDDDDD"
+            android:textSize="15sp"/>
+
+        <CheckBox
+            android:id="@+id/cbDDG"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:checked="true"
+            android:text="🦆 DuckDuckGo"
+            android:textColor="#DDDDDD"
+            android:textSize="15sp"/>
+
+        <CheckBox
+            android:id="@+id/cbDolphin"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:checked="true"
+            android:text="🐬 Dolphin"
+            android:textColor="#DDDDDD"
+            android:textSize="15sp"/>
+
+        <CheckBox
+            android:id="@+id/cbMi"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:checked="true"
+            android:text="🧡 Mi Browser"
+            android:textColor="#DDDDDD"
+            android:textSize="15sp"
+            android:layout_marginBottom="20dp"/>
+
+        <Button
+            android:id="@+id/btnLaunch"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="#4A7FF5"
+            android:text="🚀 Открыть во всех браузерах"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:id="@+id/statusText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=" "
+            android:textColor="#4CAF50"
+            android:textSize="13sp"
+            android:gravity="center"/>
+
+    </LinearLayout>
+</ScrollView>
